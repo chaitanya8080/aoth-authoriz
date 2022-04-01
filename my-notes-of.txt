@@ -1,0 +1,38 @@
+
+
+1. authentication
+
+a.sign up - register
+b.login - login
+
+a.sign Up /Register
+1.email
+2.Password
+-----checking already register or not 
+
+b.login 
+1.email //check
+2.password //check
+
+2 encript 
+1.email 
+2 passsword - encripted differently 
+
+person a = "secret messege = "be there at 3 "
+      there should be code language
+
+    person b = he receives = " 11233ff" encripted ,he will decrept it as = "be there at 3";
+
+
+HASHING === in hashing you wont tbe able to reverse it or decrypt it.
+for hashing we wl us use the library for that 
+
+for backend to know user is login or not 
+
+token is used =login /signup =  server sends the token and == library jsonwebtoken
+token =varifies then = we let the user in
+
+
+
+
+

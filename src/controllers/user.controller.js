@@ -1,0 +1,43 @@
+const express = require("express");
+const { body, validationResult } = require("express-validator");
+
+const User = require("../model/user.model");
+
+const router = express.Router();
+
+router.post("/",body("name").custom((value) => {
+    if (value && value.length < 4) {
+      throw new Error("Name if provided must be at least 4 characters");
+    }
+    return true;
+  }),
+  body("email")
+    .isEmail()
+    .custom(async (value) => {
+      const user = await User.findOne({ email: value });
+
+      if (user) {
+        throw new Error("Email is already taken");
+      }
+      return true;
+    }),
+
+  async (req, res) => {
+    try {
+      console.log(body("name"));
+      const errors = validationResult(req);
+      console.log({ errors });
+      if (!errors.isEmpty()) {
+        return res.status(400).send({ errors: errors.array() });
+      }
+
+      const user = await User.create(req.body);
+
+      return res.status(201).send(user);
+    } catch (err) {
+      return res.status(500).send({ message: err.message });
+    }
+  }
+);
+
+module.exports = router;
